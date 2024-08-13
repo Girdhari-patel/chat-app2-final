@@ -8,7 +8,7 @@ const url = process.env.DB_URL;
 export const connectToDatabase = async () => {
   try {
     await mongoose.connect(
-      `mongodb://chandrasekhar:Password1@localhost:27017/chatterup`,
+       url,
       {
         // Remove the following options as they are deprecated
         // useNewUrlParser: true,
