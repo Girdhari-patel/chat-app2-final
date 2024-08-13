@@ -1,4 +1,4 @@
-import express from 'express';
+ import express from 'express';
 import http from 'http';
 import path from 'path';
 import { Server } from 'socket.io';
@@ -10,14 +10,20 @@ import { fileURLToPath } from 'url';
 import Filter from 'bad-words';
 
 // Serve static files from the 'public' folder
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+const __dirname = path.resolve();
+console.log(__dirname);
 
 export const app = express();
 app.use(cors());
 
-const publicPath = path.join(__dirname, 'public');
-app.use(express.static(publicPath));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "public"));
+});
 
 
 export const server = http.createServer(app);
